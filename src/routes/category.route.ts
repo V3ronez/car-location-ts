@@ -1,21 +1,18 @@
 import { Router } from 'express';
-import { Category } from '../entities/Category';
+import { CategoriesRepository } from '../repositories/category.repository';
 
 const categoryRoute = Router();
+const categoryRepository = new CategoriesRepository();
 
-const categories = [];
-
-categoryRoute.post('/', (req, res) => {
+categoryRoute.post('/', async (req, res) => {
   const { name, description } = req.body;
+  await categoryRepository.create({ name, description });
+  return res.status(201).send();
+});
 
-  const category = new Category({
-    name,
-    description,
-    created_at: new Date(),
-  });
-  categories.push(category);
-
-  return res.status(201).json({ category });
+categoryRoute.get('/', async (req, res) => {
+  const categories = await categoryRepository.findAll();
+  return res.status(200).json(categories);
 });
 
 export { categoryRoute };
