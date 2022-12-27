@@ -24,9 +24,10 @@ export class CategoriesRepository implements ICategoryRepository {
     });
     await this.categories.push(category);
   }
-  categoryUniqueName(name: string): CategoryExistsError | void {
-    if (this.categories.find((category) => category.name == name)) {
-      throw new CategoryExistsError();
-    }
+
+  async findByName(
+    name: string,
+  ): Promise<Category | CategoryExistsError | undefined> {
+    return await this.categories.find((category) => category.name == name);
   }
 }
