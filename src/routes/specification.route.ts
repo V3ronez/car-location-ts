@@ -3,10 +3,10 @@ import { SpecificationsRepository } from '../repositories/specification/specific
 import { CreateSpecification } from '../useCases/specification/create.specification';
 
 const specificationsRouters = Router();
+const specificationRepository = new SpecificationsRepository();
 
 specificationsRouters.post('/', async (req, res) => {
   const { name, description } = req.body;
-  const specificationRepository = new SpecificationsRepository();
   const specificationCreate = new CreateSpecification(specificationRepository);
 
   await specificationCreate.execute({ name, description });
@@ -14,7 +14,6 @@ specificationsRouters.post('/', async (req, res) => {
 });
 
 specificationsRouters.get('/', async (req, res) => {
-  const specificationRepository = new SpecificationsRepository();
   const allSpecifications = await specificationRepository.findAll();
   return res.status(200).json(allSpecifications);
 });
