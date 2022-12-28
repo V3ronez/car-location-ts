@@ -1,5 +1,5 @@
 import { CategoryTDO } from '../dtos/category.body';
-import { Category } from '../entities/Category';
+import { Category } from '../entities/category';
 import { CategoryExistsError } from '../errors/category.unique.name';
 
 export abstract class ICategoryRepository {
