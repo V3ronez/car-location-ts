@@ -8,4 +8,4 @@ app.use('/category', categoriesRouters);
 app.use('/specification', specificationsRouters);
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => console.log(`server running in port ${PORT} ⚡️`));
+app.listen(PORT, () => console.log(`server running in port ${PORT}  ⚡️`));
