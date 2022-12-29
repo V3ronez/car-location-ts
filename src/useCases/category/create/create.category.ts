@@ -5,7 +5,7 @@ interface CreateCategoryProps {
   name: string;
   description: string;
 }
-export class CreateCategory {
+export class CreateCategoryUseCase {
   constructor(private categoriesRepository: ICategoryRepository) {}
   async execute({ name, description }: CreateCategoryProps): Promise<void> {
     const category = await this.categoriesRepository.findByName(name);
