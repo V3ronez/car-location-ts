@@ -15,10 +15,10 @@ export class CategoriesRepository implements ICategoryRepository {
     throw new Error('Method not implemented.');
   }
 
-  async create(categoryBody: CategoryTDO): Promise<void> {
+  async create({ name, description }: CategoryTDO): Promise<void> {
     const category = new Category({
-      name: categoryBody.name,
-      description: categoryBody.description,
+      name,
+      description,
       created_at: new Date(),
     });
     await this.categories.push(category);
