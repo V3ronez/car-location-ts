@@ -1,5 +1,5 @@
-import { CategoryExistsError } from '../../errors/category.unique.name';
-import { ICategoryRepository } from './../../repositories/category.repository.interface';
+import { CategoryExistsError } from '../../../errors/category.unique.name';
+import { ICategoryRepository } from '../../../repositories/category/category.repository.interface';
 
 interface CreateCategoryProps {
   name: string;
@@ -12,7 +12,6 @@ export class CreateCategory {
     if (category) {
       throw new CategoryExistsError();
     }
-
     await this.categoriesRepository.create({ name, description });
   }
 }
