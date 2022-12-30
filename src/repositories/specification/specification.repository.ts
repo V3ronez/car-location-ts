@@ -4,8 +4,16 @@ import { ISpecificationRepository } from './specification.repository.interface';
 
 export class SpecificationsRepository implements ISpecificationRepository {
   private specifications: Specification[];
-  constructor() {
+  private static INSTANCE: SpecificationsRepository;
+  private constructor() {
     this.specifications = [];
+  }
+
+  static getInstance() {
+    if (!SpecificationsRepository.INSTANCE) {
+      SpecificationsRepository.INSTANCE = new SpecificationsRepository();
+    }
+    return SpecificationsRepository.INSTANCE;
   }
 
   async create(specificationBody: SpecificationTDO): Promise<void> {

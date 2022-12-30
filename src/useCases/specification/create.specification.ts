@@ -5,7 +5,7 @@ interface CreateSpecificationProps {
   name: string;
   description: string;
 }
-export class CreateSpecification {
+export class CreateSpecificationUseCase {
   constructor(private specificationsRepository: ISpecificationRepository) {}
   async execute({
     name,
