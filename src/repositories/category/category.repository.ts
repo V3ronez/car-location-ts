@@ -4,9 +4,20 @@ import { ICategoryRepository } from './category.repository.interface';
 
 export class CategoriesRepository implements ICategoryRepository {
   private categories: Category[];
-  constructor() {
+
+  private static INSTANCE: CategoriesRepository;
+
+  private constructor() {
     this.categories = [];
   }
+
+  static getInstance() {
+    if (!CategoriesRepository.INSTANCE) {
+      CategoriesRepository.INSTANCE = new CategoriesRepository();
+    }
+    return CategoriesRepository.INSTANCE;
+  }
+
   async findAll(): Promise<Category[] | null> {
     return await this.categories;
   }
