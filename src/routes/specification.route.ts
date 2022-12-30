@@ -1,11 +1,10 @@
 import { Router } from 'express';
-import { createControllerCategory } from '../useCases/category/create';
-import { CreateSpecificationController } from '../useCases/specification/create.specification.controller';
+import { createSpecificationController } from '../useCases/specification/create';
 
 const specificationsRouters = Router();
 
 specificationsRouters.post('/', async (request, response) => {
-  return createControllerCategory.handle(request, response);
+  return createSpecificationController.handle(request, response);
 });
 
 // specificationsRouters.get('/', async (request, response) => {

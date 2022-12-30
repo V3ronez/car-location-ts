@@ -1,5 +1,5 @@
-import { SpecificationExistsError } from '../../repositories/specification/errors/specification.unique.name';
-import { ISpecificationRepository } from '../../repositories/specification/specification.repository.interface';
+import { ISpecificationRepository } from '../../../repositories/specification/specification.repository.interface';
+import { SpecificationExistsError } from '../../../repositories/specification/errors/specification.unique.name';
 
 interface CreateSpecificationProps {
   name: string;

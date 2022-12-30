@@ -1,4 +1,4 @@
-import { CategoryExistsError } from '../../../errors/category.unique.name';
+import { CategoryExistsError } from '../../../repositories/category/errors/category.unique.name';
 import { ICategoryRepository } from '../../../repositories/category/category.repository.interface';
 
 interface CreateCategoryProps {
