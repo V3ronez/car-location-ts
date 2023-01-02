@@ -34,6 +34,13 @@ export class ImportCategoriesCSVUseCase {
 
   async execute(file: Express.Multer.File): Promise<void> {
     const categories = await this.LoadCategories(file);
-    console.log(categories);
+    categories.map(async (category) => {
+      const { name, description } = category;
+      const alreadyExists = await this.categoriesRepository.findByName(name);
+
+      if (!alreadyExists) {
+        await this.categoriesRepository.create({ name, description });
+      }
+    });
   }
 }
