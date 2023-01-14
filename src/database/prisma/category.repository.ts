@@ -18,11 +18,20 @@ export class PrismaRepository implements ICategoryRepository {
       },
     });
   }
-  async findById(id: string): Promise<Category> {
-    throw new Error('Method not implemented.');
+
+  async findById(id: string) {
+    const category = await this.prisma.category.findFirst({
+      where: {
+        id,
+      },
+    });
+    if (!category) {
+      return null;
+    }
+    return category;
   }
 
-  findAll(): Promise<Category[]> {
+  findAll() {
     throw new Error('Method not implemented.');
   }
 

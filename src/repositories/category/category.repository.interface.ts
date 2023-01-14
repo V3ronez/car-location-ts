@@ -3,7 +3,7 @@ import { Category } from '../../entities/category';
 
 export abstract class ICategoryRepository {
   abstract create(category: CategoryTDO): Promise<void>;
-  abstract findById(id: string): Promise<Category | null>;
-  abstract findAll(): Promise<Category[] | null>;
+  abstract findById(id: string);
+  abstract findAll();
   abstract findByName(name: string);
 }
