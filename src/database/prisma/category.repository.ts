@@ -36,5 +36,10 @@ export class PrismaRepository implements ICategoryRepository {
       return null;
     }
     return category;
+    // {
+    //   name: category.name,
+    //   description: category.description,
+    //   created_at: category.created_at,
+    // };
   }
 }

@@ -9,7 +9,6 @@ export class CreateCategoryUseCase {
   constructor(private categoriesRepository: ICategoryRepository) {}
   async execute({ name, description }: CreateCategoryProps): Promise<void> {
     const category = await this.categoriesRepository.findByName(name);
-
     if (category) {
       throw new CategoryExistsError();
     }
