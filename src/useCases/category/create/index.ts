@@ -1,4 +1,4 @@
-import { PrismaRepository } from '../../../database/prisma/notification.repository';
+import { PrismaRepository } from '../../../database/prisma/category.repository';
 import { CreateCategoryUseCase } from './create.category';
 import { CreateCategoryController } from './create.category.controller';
 

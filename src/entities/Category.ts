@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { Replace } from '../helpers/replace';
 interface CategoryProps {
   name: string;
   description: string;
@@ -7,9 +8,9 @@ interface CategoryProps {
 export class Category {
   private _id: string;
   private props: CategoryProps;
-  constructor(props: CategoryProps, id?: string) {
-    this.props = { ...props };
-    this._id = id ?? randomUUID();
+  constructor(props: Replace<CategoryProps, { created_at?: Date }>) {
+    this._id = randomUUID();
+    this.props = { ...props, created_at: props.created_at ?? new Date() };
   }
 
   get id() {
@@ -28,7 +29,7 @@ export class Category {
   set description(value: string) {
     this.props.description = value;
   }
-  get createdAt() {
+  get created_at() {
     return this.props.created_at;
   }
 }
