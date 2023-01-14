@@ -1,6 +1,5 @@
 import { PrismaClient } from '@prisma/client';
 import { CategoryTDO } from '../../dtos/category.body';
-import { Category } from '../../entities/category';
 import { ICategoryRepository } from '../../repositories/category/category.repository.interface';
 
 export class PrismaRepository implements ICategoryRepository {
@@ -31,8 +30,9 @@ export class PrismaRepository implements ICategoryRepository {
     return category;
   }
 
-  findAll() {
-    throw new Error('Method not implemented.');
+  async findAll() {
+    const allRegisters = await this.prisma.category.findMany();
+    return allRegisters;
   }
 
   async findByName(name: string) {
@@ -45,10 +45,5 @@ export class PrismaRepository implements ICategoryRepository {
       return null;
     }
     return category;
-    // {
-    //   name: category.name,
-    //   description: category.description,
-    //   created_at: category.created_at,
-    // };
   }
 }
