@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { Replace } from '../helpers/replace';
 interface SpecificationProps {
   name: string;
   description: string;
@@ -7,9 +8,9 @@ interface SpecificationProps {
 export class Specification {
   private _id: string;
   private props: SpecificationProps;
-  constructor(props: SpecificationProps, id?: string) {
-    this.props = { ...props };
-    this._id = id ?? randomUUID();
+  constructor(props: Replace<SpecificationProps, { created_at?: Date }>) {
+    this._id = randomUUID();
+    this.props = { ...props, created_at: props.created_at ?? new Date() };
   }
 
   get id() {

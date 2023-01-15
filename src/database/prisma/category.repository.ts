@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import { CategoryTDO } from '../../dtos/category.body';
 import { ICategoryRepository } from '../../repositories/category/category.repository.interface';
 
-export class PrismaRepository implements ICategoryRepository {
+export class CategoryPrismaRepository implements ICategoryRepository {
   private prisma = new PrismaClient();
   constructor() {
     this.prisma.$connect;
@@ -31,8 +31,11 @@ export class PrismaRepository implements ICategoryRepository {
   }
 
   async findAll() {
-    const allRegisters = await this.prisma.category.findMany();
-    return allRegisters;
+    const allCategories = await this.prisma.category.findMany();
+    if (!allCategories) {
+      return null;
+    }
+    return allCategories;
   }
 
   async findByName(name: string) {

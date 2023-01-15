@@ -4,7 +4,7 @@ import { ISpecificationRepository } from '../../../repositories/specification/sp
 export class ListSpecificationsUseCase {
   constructor(private specificationsRepository: ISpecificationRepository) {}
   async execute(): Promise<Specification[] | null> {
-    const findAll = await this.specificationsRepository.findAll();
-    return findAll;
+    const allSpecification = await this.specificationsRepository.findAll();
+    return allSpecification;
   }
 }

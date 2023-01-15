@@ -1,13 +1,14 @@
-import { SpecificationsRepository } from '../../../repositories/specification/specification.repository';
+import { SpecificationPrismaRepository } from '../../../database/prisma/specification.repository';
 import { CreateSpecificationUseCase } from './create.specification';
 import { CreateSpecificationController } from './create.specification.controller';
 
-const specificationsRepository = SpecificationsRepository.getInstance();
-const createSpecificationUseCase = new CreateSpecificationUseCase(
-  specificationsRepository,
-);
-const createSpecificationController = new CreateSpecificationController(
-  createSpecificationUseCase,
-);
-
-export { createSpecificationController };
+export default (): CreateSpecificationController => {
+  const specificationsRepository = new SpecificationPrismaRepository();
+  const createSpecificationUseCase = new CreateSpecificationUseCase(
+    specificationsRepository,
+  );
+  const createSpecificationController = new CreateSpecificationController(
+    createSpecificationUseCase,
+  );
+  return createSpecificationController;
+};
