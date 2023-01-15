@@ -21,8 +21,8 @@ categoriesRouters.post(
   },
 );
 
-categoriesRouters.get('/', (request, response) => {
-  return listCategoriesController().handle(request, response);
+categoriesRouters.get('/', async (request, response) => {
+  return await listCategoriesController().handle(request, response);
 });
 
 export { categoriesRouters };

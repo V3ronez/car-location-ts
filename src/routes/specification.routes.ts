@@ -4,12 +4,12 @@ import listSpecificationController from '../useCases/specification/list';
 
 const specificationsRouters = Router();
 
-specificationsRouters.post('/', (request, response) => {
-  return createSpecificationController().handle(request, response);
+specificationsRouters.post('/', async (request, response) => {
+  return await createSpecificationController().handle(request, response);
 });
 
-specificationsRouters.get('/', (request, response) => {
-  return listSpecificationController().handler(request, response);
+specificationsRouters.get('/', async (request, response) => {
+  return await listSpecificationController().handler(request, response);
 });
 
 export { specificationsRouters };

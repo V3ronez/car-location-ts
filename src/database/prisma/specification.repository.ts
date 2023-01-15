@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Specification } from '@prisma/client';
 import { SpecificationTDO } from '../../dtos/specification.body';
 import { ISpecificationRepository } from '../../repositories/specification/specification.repository.interface';
 
@@ -19,7 +19,7 @@ export class SpecificationPrismaRepository implements ISpecificationRepository {
   findById() {
     throw new Error('Method not implemented.');
   }
-  async findAll() {
+  async findAll(): Promise<Specification[] | null> {
     const allSpecification = await this.prismaClient.specification.findMany();
     if (!allSpecification) {
       return null;
@@ -27,7 +27,7 @@ export class SpecificationPrismaRepository implements ISpecificationRepository {
     return allSpecification;
   }
 
-  async findByName(name: string) {
+  async findByName(name: string): Promise<Specification | null> {
     const specification = await this.prismaClient.specification.findFirst({
       where: {
         name,
