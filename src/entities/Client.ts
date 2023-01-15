@@ -9,14 +9,14 @@ export interface ClientProps {
   SSN: string;
   driver_license: string;
   isAdmin: boolean;
-  create_at: Date;
+  created_at: Date;
 }
 export class Client {
   private _id: string;
   private props: ClientProps;
-  constructor(props: Replace<ClientProps, { create_at?: Date }>) {
+  constructor(props: Replace<ClientProps, { created_at?: Date }>) {
     this._id = randomUUID();
-    this.props = { ...props, create_at: props.create_at ?? new Date() };
+    this.props = { ...props, created_at: props.created_at ?? new Date() };
   }
 
   get id() {
@@ -71,6 +71,6 @@ export class Client {
     return this.props.isAdmin;
   }
   get created_at(): Date {
-    return this.props.create_at;
+    return this.props.created_at;
   }
 }

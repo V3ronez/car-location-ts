@@ -29,5 +29,15 @@ model Specification {
 }
 
 model Client {
+  id             String   @id @default(uuid())
+  name           String
+  username       String   @unique
+  email          String   @unique
+  password       String
+  SSN            String   @unique
+  driver_license String   @unique
+  isAdmin        Boolean
+  created_at     DateTime @default(now())
 
+  @@map("clients")
 }
