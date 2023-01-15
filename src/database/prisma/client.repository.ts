@@ -3,8 +3,8 @@ import { ClientTDO } from '../../dtos/client.body';
 import { clientMapper } from '../../repositories/client/client.mapper';
 import { IClientRepository } from '../../repositories/client/client.repository.interface';
 
-export class ClientRepositoryPrisma implements IClientRepository {
-  private prismaClient: PrismaClient;
+export class ClientPrismaRepository implements IClientRepository {
+  private prismaClient = new PrismaClient();
   constructor() {
     this.prismaClient.$connect;
   }
