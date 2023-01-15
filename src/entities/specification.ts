@@ -8,8 +8,11 @@ interface SpecificationProps {
 export class Specification {
   private _id: string;
   private props: SpecificationProps;
-  constructor(props: Replace<SpecificationProps, { created_at?: Date }>) {
-    this._id = randomUUID();
+  constructor(
+    props: Replace<SpecificationProps, { created_at?: Date }>,
+    id?: string,
+  ) {
+    this._id = id ?? randomUUID();
     this.props = { ...props, created_at: props.created_at ?? new Date() };
   }
 

@@ -28,3 +28,6 @@ model Specification {
   @@map("specifications")
 }
 
+model Client {
+
+}
