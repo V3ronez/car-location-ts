@@ -1,5 +1,5 @@
 import { SpecificationTDO } from '../../dtos/specification.body';
-import { Specification } from '../../entities/specification';
+import { Specification } from '../../entities/Specification';
 import { ISpecificationRepository } from './specification.repository.interface';
 
 export class SpecificationsRepository implements ISpecificationRepository {

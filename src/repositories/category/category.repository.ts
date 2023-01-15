@@ -1,5 +1,5 @@
 import { CategoryTDO } from '../../dtos/category.body';
-import { Category } from '../../entities/category';
+import { Category } from '../../entities/Category';
 import { ICategoryRepository } from './category.repository.interface';
 
 export class CategoriesRepository implements ICategoryRepository {
