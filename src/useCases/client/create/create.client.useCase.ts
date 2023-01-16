@@ -5,7 +5,14 @@ import { IClientRepository } from '../../../repositories/client/client.repositor
 export class CreateClientUseCase {
   constructor(private clientRepository: IClientRepository) {}
   async execute(data: ClientTDO) {
-    const clientInsert = clientMapper(data);
+    const userAlreadyExist = await this.clientRepository.findByEmail(
+      data.email,
+    );
+
+    if (userAlreadyExist) throw new Error('User already exist');
+
+    const clientInsert = await clientMapper(data);
+
     await this.clientRepository.create(clientInsert);
   }
 }

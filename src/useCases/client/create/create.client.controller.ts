@@ -8,20 +8,15 @@ export class CreateClientController {
     const { name, username, password, email, SSN, driver_license }: ClientTDO =
       request.body;
 
-    try {
-      await this.createClientUseCase.execute({
-        name,
-        username,
-        password,
-        email,
-        SSN,
-        driver_license,
-      });
-    } catch (err) {
-      return response
-        .status(400)
-        .json({ 'Error in insert this attr': err.meta.target });
-    }
+    await this.createClientUseCase.execute({
+      name,
+      username,
+      password,
+      email,
+      SSN,
+      driver_license,
+    });
+
     return response.status(201).send();
   }
 }

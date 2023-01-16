@@ -15,6 +15,7 @@ export class SpecificationPrismaRepository implements ISpecificationRepository {
         description,
       },
     });
+    this.prismaClient.$disconnect;
   }
   async findById(id: string): Promise<Specification | null> {
     const specification = await this.prismaClient.specification.findFirst({
@@ -22,14 +23,19 @@ export class SpecificationPrismaRepository implements ISpecificationRepository {
         id,
       },
     });
+    this.prismaClient.$disconnect;
+
     if (!specification) {
       return null;
     }
+
     return specification;
   }
 
   async findAll(): Promise<Specification[] | null> {
     const allSpecification = await this.prismaClient.specification.findMany();
+    this.prismaClient.$disconnect;
+
     if (!allSpecification) {
       return null;
     }
@@ -42,6 +48,8 @@ export class SpecificationPrismaRepository implements ISpecificationRepository {
         name,
       },
     });
+    this.prismaClient.$disconnect;
+
     if (!specification) {
       return null;
     }

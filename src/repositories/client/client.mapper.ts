@@ -1,6 +1,7 @@
 import { ClientTDO } from '../../dtos/client.body';
+import { hash } from 'bcrypt';
 
-const clientMapper = ({
+const clientMapper = async ({
   name,
   username,
   email,
@@ -8,11 +9,12 @@ const clientMapper = ({
   SSN,
   driver_license,
 }: ClientTDO) => {
+  const passwordHash = await hash(password, 6);
   return {
     name,
     username,
     email,
-    password,
+    password: passwordHash,
     SSN,
     driver_license,
   };

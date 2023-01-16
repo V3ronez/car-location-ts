@@ -6,4 +6,5 @@ export abstract class IClientRepository {
   abstract findAll(): Promise<Client[] | null>;
   abstract findById(id: string): Promise<Client | null>;
   abstract findByName(name: string): Promise<Client | null>;
+  abstract findByEmail(email: string): Promise<Client | null>;
 }
