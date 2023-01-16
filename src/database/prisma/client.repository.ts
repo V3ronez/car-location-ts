@@ -23,10 +23,23 @@ export class ClientPrismaRepository implements IClientRepository {
     return allClient;
   }
 
-  findById() {
-    throw new Error('Method not implemented.');
+  async findById(id: string): Promise<Client | null> {
+    const client = await this.prismaClient.client.findFirst({
+      where: {
+        id,
+      },
+    });
+    if (!client) return null;
+    return client;
   }
-  findByName() {
-    throw new Error('Method not implemented.');
+
+  async findByName(name: string): Promise<Client | null> {
+    const client = await this.prismaClient.client.findFirst({
+      where: {
+        name,
+      },
+    });
+    if (!client) return null;
+    return client;
   }
 }
