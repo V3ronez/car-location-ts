@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { Client, PrismaClient } from '@prisma/client';
 import { ClientTDO } from '../../dtos/client.body';
 import { clientMapper } from '../../repositories/client/client.mapper';
 import { IClientRepository } from '../../repositories/client/client.repository.interface';
@@ -15,9 +15,14 @@ export class ClientPrismaRepository implements IClientRepository {
     });
   }
 
-  findAll() {
-    throw new Error('Method not implemented.');
+  async findAll(): Promise<Client[] | null> {
+    const allClient = await this.prismaClient.client.findMany();
+    if (!allClient) {
+      return null;
+    }
+    return allClient;
   }
+
   findById() {
     throw new Error('Method not implemented.');
   }

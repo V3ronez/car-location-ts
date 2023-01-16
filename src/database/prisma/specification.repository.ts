@@ -16,9 +16,18 @@ export class SpecificationPrismaRepository implements ISpecificationRepository {
       },
     });
   }
-  findById() {
-    throw new Error('Method not implemented.');
+  async findById(id: string): Promise<Specification | null> {
+    const specification = await this.prismaClient.specification.findFirst({
+      where: {
+        id,
+      },
+    });
+    if (!specification) {
+      return null;
+    }
+    return specification;
   }
+
   async findAll(): Promise<Specification[] | null> {
     const allSpecification = await this.prismaClient.specification.findMany();
     if (!allSpecification) {

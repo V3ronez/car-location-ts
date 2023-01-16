@@ -23,6 +23,7 @@ export class Specification {
   get name() {
     return this.props.name;
   }
+
   set name(value: string) {
     this.props.name = value;
   }
