@@ -9,6 +9,7 @@ export class CreateClientUseCase {
     const userAlreadyExist = await this.clientRepository.findByEmail(
       data.email,
     );
+
     if (userAlreadyExist) throw new Error('User already exist');
 
     const isValidEmail = emailValidate(data.email);
