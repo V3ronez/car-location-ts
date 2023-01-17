@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { AuthClientUseCase, ITokenReturn } from './auth.client';
+import { AuthClientUseCase } from './auth.client';
 
 export class AuthClientController {
   constructor(private authClientUserCase: AuthClientUseCase) {}
