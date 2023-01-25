@@ -5,16 +5,12 @@ import { IClientRepository } from '../../repositories/client/client.repository.i
 
 export class ClientPrismaRepository implements IClientRepository {
   private prismaClient = new PrismaClient();
-  constructor() {
-    this.prismaClient.$connect;
-  }
 
   async create(client: ClientTDO) {
     const clientInsert = await clientMapper(client);
     await this.prismaClient.client.create({
       data: clientInsert,
     });
-    this.prismaClient.$disconnect;
   }
 
   async findAll(): Promise<Client[] | null> {
@@ -22,7 +18,6 @@ export class ClientPrismaRepository implements IClientRepository {
     if (!allClient) {
       return null;
     }
-    this.prismaClient.$disconnect;
     return allClient;
   }
 
@@ -33,7 +28,6 @@ export class ClientPrismaRepository implements IClientRepository {
       },
     });
     if (!client) return null;
-    this.prismaClient.$disconnect;
     return client;
   }
 
@@ -44,7 +38,6 @@ export class ClientPrismaRepository implements IClientRepository {
       },
     });
     if (!client) return null;
-    this.prismaClient.$disconnect;
     return client;
   }
 
@@ -53,7 +46,6 @@ export class ClientPrismaRepository implements IClientRepository {
       where: { email },
     });
     if (!client) return null;
-    this.prismaClient.$disconnect;
     return client;
   }
 }

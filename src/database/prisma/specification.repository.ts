@@ -4,9 +4,7 @@ import { ISpecificationRepository } from '../../repositories/specification/speci
 
 export class SpecificationPrismaRepository implements ISpecificationRepository {
   private prismaClient = new PrismaClient();
-  constructor() {
-    this.prismaClient.$connect;
-  }
+
   async create(specification: SpecificationTDO): Promise<void> {
     const { name, description } = specification;
     await this.prismaClient.specification.create({
@@ -15,7 +13,6 @@ export class SpecificationPrismaRepository implements ISpecificationRepository {
         description,
       },
     });
-    this.prismaClient.$disconnect;
   }
   async findById(id: string): Promise<Specification | null> {
     const specification = await this.prismaClient.specification.findFirst({
@@ -23,7 +20,6 @@ export class SpecificationPrismaRepository implements ISpecificationRepository {
         id,
       },
     });
-    this.prismaClient.$disconnect;
 
     if (!specification) {
       return null;
@@ -34,7 +30,6 @@ export class SpecificationPrismaRepository implements ISpecificationRepository {
 
   async findAll(): Promise<Specification[] | null> {
     const allSpecification = await this.prismaClient.specification.findMany();
-    this.prismaClient.$disconnect;
 
     if (!allSpecification) {
       return null;
@@ -48,7 +43,6 @@ export class SpecificationPrismaRepository implements ISpecificationRepository {
         name,
       },
     });
-    this.prismaClient.$disconnect;
 
     if (!specification) {
       return null;

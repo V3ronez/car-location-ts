@@ -13,9 +13,9 @@ export class CreateClientUseCase {
     if (userAlreadyExist) throw new Error('User already exist');
 
     const isValidEmail = emailValidate(data.email);
-    if (!isValidEmail) throw new Error('Email is no valid!');
+    if (!isValidEmail) throw new Error('Email is not valid!');
 
     const clientInsert = await clientMapper(data);
-    await this.clientRepository.create(clientInsert);
+    this.clientRepository.create(clientInsert);
   }
 }

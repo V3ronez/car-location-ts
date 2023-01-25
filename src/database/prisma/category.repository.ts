@@ -4,9 +4,6 @@ import { ICategoryRepository } from '../../repositories/category/category.reposi
 
 export class CategoryPrismaRepository implements ICategoryRepository {
   private prismaClient = new PrismaClient();
-  constructor() {
-    this.prismaClient.$connect;
-  }
 
   async create(category: CategoryTDO): Promise<void> {
     const { name, description } = category;
@@ -16,7 +13,6 @@ export class CategoryPrismaRepository implements ICategoryRepository {
         description,
       },
     });
-    this.prismaClient.$disconnect;
   }
 
   async findById(id: string): Promise<Category | null> {
@@ -25,7 +21,6 @@ export class CategoryPrismaRepository implements ICategoryRepository {
         id,
       },
     });
-    this.prismaClient.$disconnect;
     if (!category) {
       return null;
     }
@@ -34,7 +29,6 @@ export class CategoryPrismaRepository implements ICategoryRepository {
 
   async findAll(): Promise<Category[] | null> {
     const allCategories = await this.prismaClient.category.findMany();
-    this.prismaClient.$disconnect;
     if (!allCategories) {
       return null;
     }
@@ -47,7 +41,6 @@ export class CategoryPrismaRepository implements ICategoryRepository {
         name,
       },
     });
-    this.prismaClient.$disconnect;
     if (!category) {
       return null;
     }
