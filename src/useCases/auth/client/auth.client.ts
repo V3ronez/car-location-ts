@@ -16,12 +16,13 @@ export interface ITokenReturn {
 
 export class AuthClientUseCase {
   constructor(private repository: IClientRepository) {}
-  async handle({ email, password }: IAuthRequest) {
+  async handle({ email, password }: IAuthRequest): Promise<ITokenReturn> {
     const user = await this.repository.findByEmail(email);
-    if (!user) throw new Error('Email or password invalid');
+
+    if (!user) throw new Error('Email or password incorrect');
 
     const passwordMatch = await compare(password, user.password);
-    if (!passwordMatch) throw new Error('Email or password invalid');
+    if (!passwordMatch) throw new Error('Email or password incorrect');
 
     const secretKey = process.env.SECRET_KEY ?? 'sshhh';
     const token = sign({ name: user.name }, secretKey, {

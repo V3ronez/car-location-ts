@@ -1,15 +1,20 @@
 import { Client, PrismaClient } from '@prisma/client';
 import { ClientTDO } from '../../dtos/client.body';
-import { clientMapper } from '../../repositories/client/client.mapper';
 import { IClientRepository } from '../../repositories/client/client.repository.interface';
 
 export class ClientPrismaRepository implements IClientRepository {
   private prismaClient = new PrismaClient();
 
   async create(client: ClientTDO) {
-    const clientInsert = await clientMapper(client);
     await this.prismaClient.client.create({
-      data: clientInsert,
+      data: {
+        name: client.name,
+        username: client.username,
+        SSN: client.SSN,
+        email: client.email,
+        password: client.password,
+        driver_license: client.driver_license,
+      },
     });
   }
 
