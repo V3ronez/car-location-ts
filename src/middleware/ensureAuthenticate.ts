@@ -2,10 +2,11 @@ import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 import { ClientPrismaRepository } from '../database/prisma/client.repository';
 
-//chance function return
+//change function return
 type IPayloadReturn = {
   sub: string;
 };
+
 export async function ensureAuthenticate(
   request: Request,
   response: Response,
