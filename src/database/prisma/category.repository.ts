@@ -1,13 +1,11 @@
 import { Category, PrismaClient } from '@prisma/client';
 import { CategoryTDO } from '../../dtos/category.body';
 import { ICategoryRepository } from '../../repositories/category/category.repository.interface';
-
+import { prisma } from '../prismaConnect';
 export class CategoryPrismaRepository implements ICategoryRepository {
-  private prismaClient = new PrismaClient();
-
   async create(category: CategoryTDO): Promise<void> {
     const { name, description } = category;
-    await this.prismaClient.category.create({
+    await prisma.category.create({
       data: {
         name,
         description,
@@ -16,7 +14,7 @@ export class CategoryPrismaRepository implements ICategoryRepository {
   }
 
   async findById(id: string): Promise<Category | null> {
-    const category = await this.prismaClient.category.findFirst({
+    const category = await prisma.category.findFirst({
       where: {
         id,
       },
@@ -28,7 +26,7 @@ export class CategoryPrismaRepository implements ICategoryRepository {
   }
 
   async findAll(): Promise<Category[] | null> {
-    const allCategories = await this.prismaClient.category.findMany();
+    const allCategories = await prisma.category.findMany();
     if (!allCategories) {
       return null;
     }
@@ -36,7 +34,7 @@ export class CategoryPrismaRepository implements ICategoryRepository {
   }
 
   async findByName(name: string): Promise<Category | null> {
-    const category = await this.prismaClient.category.findFirst({
+    const category = await prisma.category.findFirst({
       where: {
         name,
       },

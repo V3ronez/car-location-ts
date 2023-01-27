@@ -1,13 +1,12 @@
-import { PrismaClient, Specification } from '@prisma/client';
+import { Specification } from '@prisma/client';
 import { SpecificationTDO } from '../../dtos/specification.body';
 import { ISpecificationRepository } from '../../repositories/specification/specification.repository.interface';
+import { prisma } from '../prismaConnect';
 
 export class SpecificationPrismaRepository implements ISpecificationRepository {
-  private prismaClient = new PrismaClient();
-
   async create(specification: SpecificationTDO): Promise<void> {
     const { name, description } = specification;
-    await this.prismaClient.specification.create({
+    await prisma.specification.create({
       data: {
         name,
         description,
@@ -15,7 +14,7 @@ export class SpecificationPrismaRepository implements ISpecificationRepository {
     });
   }
   async findById(id: string): Promise<Specification | null> {
-    const specification = await this.prismaClient.specification.findFirst({
+    const specification = await prisma.specification.findFirst({
       where: {
         id,
       },
@@ -29,7 +28,7 @@ export class SpecificationPrismaRepository implements ISpecificationRepository {
   }
 
   async findAll(): Promise<Specification[] | null> {
-    const allSpecification = await this.prismaClient.specification.findMany();
+    const allSpecification = await prisma.specification.findMany();
 
     if (!allSpecification) {
       return null;
@@ -38,7 +37,7 @@ export class SpecificationPrismaRepository implements ISpecificationRepository {
   }
 
   async findByName(name: string): Promise<Specification | null> {
-    const specification = await this.prismaClient.specification.findFirst({
+    const specification = await prisma.specification.findFirst({
       where: {
         name,
       },

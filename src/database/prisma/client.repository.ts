@@ -1,12 +1,10 @@
 import { Client, PrismaClient } from '@prisma/client';
 import { ClientTDO } from '../../dtos/client.body';
 import { IClientRepository } from '../../repositories/client/client.repository.interface';
-
+import { prisma } from '../prismaConnect';
 export class ClientPrismaRepository implements IClientRepository {
-  private prismaClient = new PrismaClient();
-
   async create(client: ClientTDO) {
-    await this.prismaClient.client.create({
+    await prisma.client.create({
       data: {
         name: client.name,
         username: client.username,
@@ -19,7 +17,7 @@ export class ClientPrismaRepository implements IClientRepository {
   }
 
   async findAll(): Promise<Client[] | null> {
-    const allClient = await this.prismaClient.client.findMany();
+    const allClient = await prisma.client.findMany();
     if (!allClient) {
       return null;
     }
@@ -27,7 +25,7 @@ export class ClientPrismaRepository implements IClientRepository {
   }
 
   async findById(id: string): Promise<Client | null> {
-    const client = await this.prismaClient.client.findFirst({
+    const client = await prisma.client.findFirst({
       where: {
         id,
       },
@@ -37,7 +35,7 @@ export class ClientPrismaRepository implements IClientRepository {
   }
 
   async findByName(name: string): Promise<Client | null> {
-    const client = await this.prismaClient.client.findFirst({
+    const client = await prisma.client.findFirst({
       where: {
         name,
       },
@@ -47,7 +45,7 @@ export class ClientPrismaRepository implements IClientRepository {
   }
 
   async findByEmail(email: string): Promise<Client> {
-    const client = await this.prismaClient.client.findFirst({
+    const client = await prisma.client.findFirst({
       where: { email },
     });
     if (!client) return null;
