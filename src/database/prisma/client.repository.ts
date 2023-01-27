@@ -1,4 +1,4 @@
-import { Client, PrismaClient } from '@prisma/client';
+import { Client } from '@prisma/client';
 import { ClientTDO } from '../../dtos/client.body';
 import { IClientRepository } from '../../repositories/client/client.repository.interface';
 import { prisma } from '../prismaConnect';

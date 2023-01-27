@@ -1,4 +1,4 @@
-import { Category, PrismaClient } from '@prisma/client';
+import { Category } from '@prisma/client';
 import { CategoryTDO } from '../../dtos/category.body';
 import { ICategoryRepository } from '../../repositories/category/category.repository.interface';
 import { prisma } from '../prismaConnect';
