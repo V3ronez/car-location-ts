@@ -8,6 +8,7 @@ export class ClientPrismaRepository implements IClientRepository {
       data: {
         name: client.name,
         username: client.username,
+        avatar: client.avatar,
         SSN: client.SSN,
         email: client.email,
         password: client.password,

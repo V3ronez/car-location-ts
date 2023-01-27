@@ -4,6 +4,7 @@ import { Replace } from '../helpers/replace';
 export interface ClientProps {
   name: string;
   username: string;
+  avatar: string;
   email: string;
   password: string;
   SSN: string;
@@ -29,6 +30,14 @@ export class Client {
 
   get name(): string {
     return this.props.name;
+  }
+
+  get avatar(): string {
+    return this.props.avatar;
+  }
+
+  set avatar(path: string) {
+    this.props.avatar = path;
   }
 
   set username(username: string) {

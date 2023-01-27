@@ -4,6 +4,7 @@ import { hash } from 'bcrypt';
 const clientMapper = async ({
   name,
   username,
+  avatar,
   email,
   password,
   SSN,
@@ -13,6 +14,7 @@ const clientMapper = async ({
   return {
     name,
     username,
+    avatar,
     email,
     password: passwordHash,
     SSN,
