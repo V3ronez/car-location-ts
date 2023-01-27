@@ -1,6 +1,7 @@
 import { IClientRepository } from '../../../repositories/client/client.repository.interface';
 import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
+import { AppErrorGeneric } from '../../../errors/AppErrorGeneric';
 
 export interface IAuthRequest {
   email: string;
@@ -19,10 +20,11 @@ export class AuthClientUseCase {
   async handle({ email, password }: IAuthRequest): Promise<ITokenReturn> {
     const user = await this.repository.findByEmail(email);
 
-    if (!user) throw new Error('Email or password incorrect');
+    if (!user) throw new AppErrorGeneric('Email or password incorrect', 4041);
 
     const passwordMatch = await compare(password, user.password);
-    if (!passwordMatch) throw new Error('Email or password incorrect');
+    if (!passwordMatch)
+      throw new AppErrorGeneric('Email or password incorrect', 401);
 
     const secretKey = process.env.SECRET_KEY ?? 'sshhh';
     const token = sign({ name: user.name }, secretKey, {

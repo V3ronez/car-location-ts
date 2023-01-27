@@ -1,4 +1,4 @@
-import { CategoryExistsError } from '../../../repositories/category/errors/category.unique.name';
+import { AppErrorGeneric } from '../../../errors/AppErrorGeneric';
 import { ICategoryRepository } from '../../../repositories/category/category.repository.interface';
 
 interface CreateCategoryProps {
@@ -10,7 +10,7 @@ export class CreateCategoryUseCase {
   async execute({ name, description }: CreateCategoryProps): Promise<void> {
     const category = await this.categoriesRepository.findByName(name);
     if (category) {
-      throw new CategoryExistsError();
+      throw new AppErrorGeneric('Category already exists', 400);
     }
     await this.categoriesRepository.create({ name, description });
   }

@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 import { ClientPrismaRepository } from '../database/prisma/client.repository';
+import { AppErrorGeneric } from '../errors/AppErrorGeneric';
 
 //change function return
 type IPayloadReturn = {
@@ -14,7 +15,7 @@ export async function ensureAuthenticate(
 ) {
   const headerToken = request.headers.authorization;
 
-  if (!headerToken) throw new Error('header is necessary');
+  if (!headerToken) throw new AppErrorGeneric('header is necessary', 400);
   const [, token] = headerToken.split(' ');
   try {
     const { sub: clientId } = verify(
@@ -25,9 +26,9 @@ export async function ensureAuthenticate(
     const clientRepository = new ClientPrismaRepository();
     const client = await clientRepository.findById(clientId);
 
-    if (!client) throw new Error('Client not exist');
+    if (!client) throw new AppErrorGeneric('Client not exist', 400);
     next();
   } catch (error) {
-    throw new Error('Invalid token');
+    throw new AppErrorGeneric('Invalid token', 401);
   }
 }

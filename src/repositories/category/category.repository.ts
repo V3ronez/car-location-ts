@@ -1,5 +1,6 @@
 import { CategoryTDO } from '../../dtos/category.body';
 import { Category } from '../../entities/Category';
+import { AppErrorGeneric } from '../../errors/AppErrorGeneric';
 import { ICategoryRepository } from './category.repository.interface';
 
 export class CategoriesRepository implements ICategoryRepository {
@@ -23,7 +24,7 @@ export class CategoriesRepository implements ICategoryRepository {
   }
 
   findById(): Promise<Category | null> {
-    throw new Error('Method not implemented.');
+    throw new AppErrorGeneric('Method not implemented.');
   }
 
   async create({ name, description }: CategoryTDO): Promise<void> {

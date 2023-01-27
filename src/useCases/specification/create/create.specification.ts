@@ -1,5 +1,5 @@
+import { AppErrorGeneric } from '../../../errors/AppErrorGeneric';
 import { ISpecificationRepository } from '../../../repositories/specification/specification.repository.interface';
-import { SpecificationExistsError } from '../../../repositories/specification/errors/specification.unique.name';
 
 interface CreateSpecificationProps {
   name: string;
@@ -15,7 +15,7 @@ export class CreateSpecificationUseCase {
       await this.specificationsRepository.findByName(name);
 
     if (specificationAlreadyExists) {
-      throw new SpecificationExistsError();
+      throw new AppErrorGeneric('Specification already exists', 400);
     }
 
     await this.specificationsRepository.create({
